@@ -49,15 +49,15 @@ public class CORSheaders {
 
 				// Access-Control-Allow-Methods
 				let str = SessionConfig.CORS.methods.map{String(describing: $0)}
-				response.addHeader(.accessControlAllowMethods, value: str.joined(separator: ", "))
+				response.addHeader(.custom(name: "Access-Control-Allow-Methods"), value: str.joined(separator: ", "))
 
 				// Access-Control-Allow-Credentials
 				if SessionConfig.CORS.withCredentials {
-					response.addHeader(.accessControlAllowCredentials, value: "true")
+					response.addHeader(.custom(name: "Access-Control-Allow-Credentials"), value: "true")
 				}
 				// Access-Control-Max-Age
 				if SessionConfig.CORS.maxAge > 0 {
-					response.addHeader(.accessControlMaxAge, value: String(SessionConfig.CORS.maxAge))
+					response.addHeader(.custom(name: "Access-Control-Max-Age"), value: String(SessionConfig.CORS.maxAge))
 				}
 			}
 			
