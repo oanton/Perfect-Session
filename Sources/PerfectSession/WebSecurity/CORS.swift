@@ -47,9 +47,13 @@ public class CORSheaders {
 					response.addHeader(.accessControlAllowOrigin, value: "\(origin)")
 				}
 
-				// Access-Control-Allow-Methods
-				let str = SessionConfig.CORS.methods.map{String(describing: $0)}
-				response.addHeader(.custom(name: "Access-Control-Allow-Methods"), value: str.joined(separator: ", "))
+                // Access-Control-Allow-Methods
+                let methods = SessionConfig.CORS.methods.map{String(describing: $0)}
+                response.addHeader(.custom(name: "Access-Control-Allow-Methods"), value: methods.joined(separator: ", "))
+                
+                // Access-Control-Allow-Headers
+                let headers = SessionConfig.CORS.customHeaders.map{String(describing: $0)}
+                response.addHeader(.custom(name: "Access-Control-Allow-Headers"), value: headers.joined(separator: ", "))
 
 				// Access-Control-Allow-Credentials
 				if SessionConfig.CORS.withCredentials {
